@@ -1,0 +1,658 @@
+---
+title: API Reference
+
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell
+
+toc_footers:
+
+#includes:
+#  - errors.md.erb
+
+search: true
+
+code_clipboard: true
+
+oauth:
+  {
+    client_id: "HEQwZVag65jM88vYLkbdRdshEk4DIscC",
+    audience: "https://didaas.atb.com/",
+    domain: "https://didaas.auth0.com/",
+  }
+---
+
+# Introduction
+
+Welcome to Copper, an open identity platform that enables you and your team to build trusted, seamless, and elegant experiences for your customers.
+
+These APIs provide methods to connect with digital wallets, create and issue credentials, and receive and verify information from users. This page describes these functions in detail and provides a method to retrieve authorization for making calls, receiving information and everything else you need to get started.
+
+Below is a user flow diagram of how each of these individual components work together:
+
+<%= image_tag "images/flow_overview.jpg" %>
+
+Also, for your reference is breakdown of the roles:
+
+- **Verifier Organization**: Organization that consumes a credential the user already has for the purpose of either: (1) verifying that their credential meets the a set criteria (e.g. age must be greater than 18) or to (2) verify that they have a specified credential (e.g. must have full name credential issued by the Government of Alberta)
+- **Issuer Organization**: Organization that has the ability to issue credentials to the users based on a credential definition that their organization has created (e.g. ATB can issue a savings bank account credential based on the savings bank account credential definition they have created)
+- **Wallet**: The application that the user interacts with that allows them to connect with organizations, receive and store credentials from organizations, and send requested credentials to organizations for verification.
+- **User**: The owner and manager of their credentials. The user interacts with their wallet to keep track of their credentials and ensure that they have the most up to date copy of their credentials from organizations.
+
+# Authentication
+
+Copper uses OAuth2 Access Tokens to allow access to the API. You can register/login <a class="authorize-link" href="https://didaas.auth0.com/authorize?response_type=code&scope=openid%20profile%20email&client_id=HEQwZVag65jM88vYLkbdRdshEk4DIscC&state=2342423432&redirect_uri=http://localhost:4567&audience=https://didaas.atb.com/">here</a> to retrieve your access token.
+
+The authorization flow is automated, so it does not require you to call the below endpoints, but they have been provided for more detail.
+
+## Authorize
+
+> Click the following link to sign up or log in from the browser: <a class="authorize-link" href="https://didaas.auth0.com/authorize?response_type=code&scope=openid%20profile%20email&client_id=HEQwZVag65jM88vYLkbdRdshEk4DIscC&state=2342423432&redirect_uri=http://localhost:4567&audience=https://didaas.atb.com/">Login/Signup</a>
+
+This endpoint authenticates you with the platform to retrieve an access token. This flow needs to be executed in-browser.
+
+### Link
+
+<a class="authorize-link" href="https://didaas.auth0.com/authorize?response_type=code&scope=openid%20profile%20email&client_id=HEQwZVag65jM88vYLkbdRdshEk4DIscC&state=2342423432&redirect_uri=http://localhost:4567&audience=https://didaas.atb.com/">Login/Signup</a>
+
+### HTTP Request
+
+`GET https://didaas.auth0.com/authorize`
+
+### Query Parameters
+
+| Parameter     | Example                          | Description                                                                           |
+| ------------- | -------------------------------- | ------------------------------------------------------------------------------------- |
+| response_type | code                             | Code response for authorization code exchange.                                        |
+| scope         | openid profile email             | Default scope for OIDC authorization.                                                 |
+| client_id     | HEQwZVag65jM88vYLkbdRdshEk4DIscC | Client ID for IDaaS platform Auth0 application.                                       |
+| state         | 2342423432                       | State to pass for authorization code exchange, will be received back when redirected. |
+| redirect_uri  | http://localhost:4567            | Redirect URI of slate docs to handle code for token exchange.                         |
+| audience      | https://didaas.atb.com/          | Audience of IDaaS platform Auth0 tenant.                                              |
+
+## Token
+
+### HTTP Request
+
+`POST /oauth/token`
+
+### Query Parameters
+
+| Parameter    | Example                          | Description                                                   |
+| ------------ | -------------------------------- | ------------------------------------------------------------- |
+| grant_type   | authorization_code               | Authorization code grant type.                                |
+| client_id    | HEQwZVag65jM88vYLkbdRdshEk4DIscC | Client ID for IDaaS platform Auth0 application.               |
+| redirect_uri | http://localhost:4567            | Redirect URI of slate docs to handle code for token exchange. |
+| code         | sl6LIMC6dS85EriB                 | Authorization code that is exchanged for token.               |
+
+Copper expects the bearer JWT access_token to be included in all API requests to the server in a header that looks like the following:
+
+<code>Authorization: Bearer replacemetoken</code>
+
+<aside class="notice">
+Login to generate the correct access token using the link above.
+</aside>
+
+# Establish Connection
+
+This endpoint allows you to create a unique invitation that your user scans with their digital wallet in order to establish a secure connection with your organization. Once this connection is established you can issue credentials and send proof requests.
+
+<%= image_tag "images/create_connection_flow.jpg" %>
+
+## Create Invitation
+
+```shell
+curl "http://example.com/connections/create-invitation"
+  -X POST
+  -H "Authorization: Bearer replacemetoken"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "response": {
+    "message": "fetched",
+    "data": {
+      "connection_id": "bdac7762-0e2b-4b76-ac08-86445871055a",
+      "invitation": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation",
+        "@id": "16f53238-81ff-4d8a-950f-eb3ca0afa9ff",
+        "serviceEndpoint": "http://192.168.43.60:7000",
+        "label": "shari",
+        "recipientKeys": ["GscNoojbKptfZUCuhm4eotXyebG2bPFvLY8VxikoNroT"]
+      },
+      "invitation_url": "http://192.168.43.60:7000?c_i=eyJAdHlwZSI6ICJkaWQ6c292OkJ6Q2JzTlloTXJqSGlxWkRUVUFTSGc7c3BlYy9jb25uZWN0aW9ucy8xLjAvaW52aXRhdGlvbiIsICJAaWQiOiAiMTZmNTMyMzgtODFmZi00ZDhhLTk1MGYtZWIzY2EwYWZhOWZmIiwgInNlcnZpY2VFbmRwb2ludCI6ICJodHRwOi8vMTkyLjE2OC40My42MDo3MDAwIiwgImxhYmVsIjogInNoYXJpIiwgInJlY2lwaWVudEtleXMiOiBbIkdzY05vb2piS3B0ZlpVQ3VobTRlb3RYeWViRzJiUEZ2TFk4Vnhpa29Ocm9UIl19"
+    },
+    "success": true
+  },
+  "duration": 366
+}
+```
+
+This endpoint creates a connection invitation.
+
+### HTTP Request
+
+`POST /connections/create-invitation`
+
+### Query Parameters
+
+| Parameter | Default   | Description                                                     |
+| --------- | --------- | --------------------------------------------------------------- |
+| multi_use | false     | If set to true, the invitation can be used multiple times       |
+| public    | false     | If set to true, will create the invitation from the public DID. |
+| accept    | false     | If set to true, will auto-accept the invitation.                |
+| alias     | undefined | An alias to use as an identifier for the connection             |
+
+# Issue Credential
+
+These endpoints will walk you through how to create, define, and issue a credential to a particular user.
+
+<%= image_tag "images/create_credential_flow.jpg" %>
+
+<%= image_tag "images/issue_credential_flow.jpg" %>
+
+## Create Schema
+
+```shell
+curl "http://example.com/schemas"
+  -X POST
+  -H "Authorization: Bearer replacemetoken"
+  -H 'Content-Type: application/json'
+  -d '{
+    "schema_version": "1.0",
+    "schema_name": "myfirstschema",
+    "attributes": [
+      "name",
+      "age"
+    ]
+  }'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "response": {
+    "message": "schema created",
+    "data": {
+      "schema_name": "myfirstschema",
+      "schema_version": "1.0",
+      "attributes": ["name", "age"],
+      "schema_ledger_id": "Th7MpTaRZVRYnPiabds81Y:2:myfristschema:1.0",
+      "id": 12,
+      "createDateTime": "2020-06-04T08:22:42.648Z",
+      "createdBy": "system"
+    },
+    "success": true
+  },
+  "duration": 5337
+}
+```
+
+This endpoint allows you to create a schema. Schemas are essentially templates for the credential you would like to issue. Any new schema you create is published to the Sovrin Network and is able to be used or reused by other organizations as a base for their own credential definitions and proof requests.
+
+Learn More about [Sovrin](https://sovrin.org/).
+
+### HTTP Request
+
+`POST /schemas`
+
+### Body Parameters
+
+| Parameter      | Description                     |
+| -------------- | ------------------------------- |
+| schema_version | The version of the schema       |
+| schema_name    | The name of the schema          |
+| attributes     | The fields this schema contains |
+
+## Create Credential Definition
+
+```shell
+curl "http://example.com/credential-definitions"
+  -X POST
+  -H "Authorization: Bearer replacemetoken"
+  -H 'Content-Type: application/json'
+  -d '{
+    "schema_id": "Th7MpTaRZVRYnPiabds81Y:2:myfristschema:1.0",
+    "tag": "default",
+    "support_revocation": true
+    }'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "response": {
+    "message": "credential definition created",
+    "data": {
+      "tag": "default",
+      "schema_id": "Th7MpTaRZVRYnPiabds81Y:2:myfristschema:1.0",
+      "credential_definition_id": "Th7MpTaRZVRYnPiabds81Y:3:CL:16:default",
+      "id": 12,
+      "createDateTime": "2020-06-04T09:22:03.377Z",
+      "createdBy": "system"
+    },
+    "success": true
+  },
+  "duration": 14882
+}
+```
+
+This endpoint allows you to create a credential definition. A credential definition is a way to define criteria for the schema you wish to issue, meaning a credential definition cannot be created without a schema. You are able to decide whether or not it can be revoked as well as assign any particular “tags” to name the definition in order for the user.
+
+### HTTP Request
+
+`POST /credential-definitions`
+
+### Body Parameters
+
+| Parameter          | Description                                         |
+| ------------------ | --------------------------------------------------- |
+| schema_id          | The schema that this credential definition will use |
+| tag                | The name given to this credential definition        |
+| support_revocation | If set to true, the credentials can be revoked      |
+
+## Send Credential
+
+```shell
+curl "http://example.com/issue-credential/send"
+  -X POST
+  -H "Authorization: Bearer replacemetoken"
+  -H 'Content-Type: application/json'
+  -d '{
+      "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+      "schema_name": "preferences",
+      "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+      "comment": "string",
+      "auto_remove": true,
+      "credential_proposal": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+        "attributes": [
+          {
+            "name": "favourite_drink",
+            "mime-type": "image/jpeg",
+            "value": "martini"
+          }
+        ]
+      },
+      "schema_version": "1.0",
+      "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+      "connection_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0"
+    }'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "response": {
+    "message": "fetched",
+    "data": {
+      "thread_id": "2848733d-1996-401d-87d5-f3d6b15882b7",
+      "auto_remove": false,
+      "updated_at": "2020-06-04 10:24:16.298609Z",
+      "connection_id": "bdac7762-0e2b-4b76-ac08-86445871055a",
+      "credential_definition_id": "Th7MpTaRZVRYnPiabds81Y:3:CL:16:hsc",
+      "role": "issuer",
+      "created_at": "2020-06-04 10:24:16.298609Z",
+      "state": "offer_sent",
+      "initiator": "self",
+      "credential_offer": {
+        "schema_id": "Th7MpTaRZVRYnPiabds81Y:2:hsc:1.6",
+        "cred_def_id": "Th7MpTaRZVRYnPiabds81Y:3:CL:16:hsc",
+        "key_correctness_proof": {
+          "c": "78936690231364280453412325751756425237137357945967202595073872890677536567049",
+          "xz_cap": "1064109358124352103954475701106545985220011463370530551830518156569951364440454339083344462006285467579170104584135178105654293018632549627139490378979003842035569123423638840754088343554296509258906894662514013267701509731289431030861407164725547221354972733252011825376187065315915903871332537433652259436104010151206775275618530051658046479280695404122732258942300147774388743396351240826112053175830209031045412506271034985345397223458533100347069717826326269639671023809194748481037337844024920936319097034888020700761082658404331263722367660776909793548073865144342632599096102288782167246192202841858857511930144901939341162620199295438245425954066715368082843976923851656640745920924476",
+          "xr_cap": [
+            [
+              "master_secret",
+              "929754055935645339367658795602121756038281587937920701228979877965684805436776904817392850210481914884310849404860565377523986875577010232513290183831303717487178853980215172833207086254166063703315792347451777472166806383139070898594689395670400744491764947593910760373434142504123718801821027146916119821744332651312593228548519278041571906861061992741014902277979189104381554188736923206008579922660269757820507821137713212268899410186807044554011805002512448047405820484255712397593673520395814506118310506612196564517220987714387011323073710258318130558305123400633228649826669252734806789364387034243285249745938623117067715982293892369612478495305433747116889594036468158863432284739937"
+            ],
+            [
+              "name",
+              "1646559889192918408550316109951814272612709933149434352192671820428215288907620204227156568761421193028134631792095138255053898532176323411811849362472088201227230910608507464741893032614291534958719280112728528176906735882102252456978155008006818047045332682579525623207794185183455912248887996282428692718778171087295311246175014468639370584227824281528596849480214180466132360666725967439558677861973510236896131829200205321352628707616775640841689994192582408896238816724517398655585611145868923795405065221160189674848001406858293635114882014621494330735385488133324348695813994036955443748927609409671745922354923855921422089851307577769810676708121471531892608581382970155294048795236037"
+            ]
+          ]
+        },
+        "nonce": "1203694884322993220187109"
+      },
+      "auto_issue": true,
+      "trace": false,
+      "auto_offer": false,
+      "credential_exchange_id": "947a8900-4d21-4b04-a09b-f2bc8f27e892",
+      "schema_id": "Th7MpTaRZVRYnPiabds81Y:2:hsc:1.6",
+      "credential_proposal_dict": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential",
+        "@id": "2053f913-0cf2-45f4-b6bf-673c5181927c",
+        "schema_version": "1.6",
+        "schema_issuer_did": "Th7MpTaRZVRYnPiabds81Y",
+        "schema_name": "hsc",
+        "credential_proposal": {
+          "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+          "attributes": [
+            {
+              "name": "name",
+              "value": "jon"
+            }
+          ]
+        },
+        "comment": "send issue",
+        "schema_id": "Th7MpTaRZVRYnPiabds81Y:2:hsc:1.6",
+        "issuer_did": "Th7MpTaRZVRYnPiabds81Y",
+        "cred_def_id": "Th7MpTaRZVRYnPiabds81Y:3:CL:16:hsc"
+      }
+    },
+    "success": true
+  },
+  "duration": 156
+}
+```
+
+This endpoint allows you to issue a credential to your customer’s digital wallet. Once you have chosen a schema and defined any necessary criteria you are able to populate a user's information and issue via a secure connection. They will then be given the opportunity to review and add to their digital wallet.
+
+### HTTP Request
+
+`POST /issue-credential/send`
+
+## Body Parameters
+
+| Parameter           | Description                                                                            |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| cred_def_id         | The credential definition id                                                           |
+| schema_name         | The credential schema name                                                             |
+| issuer_did          | The did for the credential issuer                                                      |
+| comment             | A comment to attach to the issue credential request                                    |
+| auto_remove         | true if the credential should be automatically removed when put on the revocation list |
+| schema_version      | The version of the schema being used                                                   |
+| schema_issuer_id    | The id of the schema issuer                                                            |
+| connection_id       | The connection id to send the credential to                                            |
+| schema_id           | The id of the schema being used                                                        |
+| credential_proposal | An object containing the credential attributes                                         |
+
+The credential_proposal object contains the following parameters
+
+| Parameter  | Description                             |
+| ---------- | --------------------------------------- |
+| @type      | The id of the credential to issue       |
+| attributes | An array of attribute objects           |
+| name       | The name of the credential attribute    |
+| mime_type  | The type of data the attribute contains |
+| value      | The value of the attribute              |
+
+# Verify Credential
+
+## Send Proof Request
+
+```shell
+curl "http://example.com/present-proof/send-request"
+  -X POST
+  -H "Authorization: Bearer replacemetoken"
+  -H 'Content-Type: application/json'
+  -d '{
+    "connection_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "proof_request": {
+      "version": "1.0",
+      "nonce": "1234567890",
+      "name": "Proof request",
+      "requested_predicates": {
+        "additionalProp1": {
+          "p_value": 0,
+          "p_type": ">=",
+          "name": "index",
+          "restrictions": [
+            {
+              "credential_definition_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+              "schema_name": "transcript",
+              "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+              "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0",
+              "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+              "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+              "schema_version": "1.0"
+            }
+          ],
+          "non_revoked": {
+            "from_epoch": 1584961661,
+            "to_epoch": 1584961661
+          }
+        }
+      },
+      "requested_attributes": {
+        "additionalProp1": {
+          "name": "favouriteDrink",
+          "restrictions": [
+            {
+              "credential_definition_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+              "schema_name": "transcript",
+              "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+              "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0",
+              "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+              "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+              "schema_version": "1.0"
+            }
+          ],
+          "non_revoked": {
+            "from_epoch": 1584961661,
+            "to_epoch": 1584961661
+          }
+        }
+      }
+    },
+    "comment": "string"
+  }'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "connection_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "proof_request": {
+    "version": "1.0",
+    "nonce": "1234567890",
+    "name": "Proof request",
+    "requested_predicates": {
+      "additionalProp1": {
+        "p_value": 0,
+        "p_type": ">=",
+        "name": "index",
+        "restrictions": [
+          {
+            "schema_name": "transcript",
+            "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+            "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0",
+            "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+            "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+            "schema_version": "1.0"
+          }
+        ],
+        "non_revoked": {
+          "from_epoch": 1584961661,
+          "to_epoch": 1584961661
+        }
+      }
+    },
+    "requested_attributes": {
+      "additionalProp1": {
+        "name": "favouriteDrink",
+        "restrictions": [
+          {
+            "schema_name": "transcript",
+            "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+            "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0",
+            "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+            "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+            "schema_version": "1.0"
+          }
+        ],
+        "non_revoked": {
+          "from_epoch": 1584961661,
+          "to_epoch": 1584961661
+        }
+      }
+    }
+  },
+  "comment": "string"
+}
+```
+
+This endpoint allows you to create a proof request to receive and verify information from your customer.
+
+### HTTP Request
+
+`POST /present-proof/send-request`
+
+### Body Parameters
+
+| Parameter            | Description                                            |
+| -------------------- | ------------------------------------------------------ |
+| connection_id        | The connection identifier to send the proof request to |
+| comment              | A comment to attach to the proof request               |
+| proof_request        | An object containing proof request parameters          |
+| version              | The proof request version                              |
+| nonce                | The proof request identifier                           |
+| name                 | The proof request name                                 |
+| requested_predicates | An object containing predicates to request             |
+| requested_attributes | An object containing attributes to request             |
+
+Attributes and predicates have the following parameters:
+
+| Parameter         | Description                                                  |
+| ----------------- | ------------------------------------------------------------ |
+| name              | The connection identifier to send the proof request to       |
+| restrictions      | A comment to attach to the proof request                     |
+| cred_def_id       | The id of the credential definition to restrict the field to |
+| schema_name       | The credential schema to restrict the field to               |
+| schema_id         | The id of the schema to restrict the field to                |
+| schema_issuer_did | The schema issuer did to restrict the field to               |
+| issuer_did        | The issuer did to restrict the field to                      |
+| schema_version    | The schema version to restrict the field to                  |
+| non_revoked       | An object containing proof request parameters                |
+| from_epoch        | beginning of revocation period                               |
+| to_epoch          | end of revocation period                                     |
+
+## Get Proof Records
+
+```shell
+curl "http://example.com/present-proof/records/1234"
+  -H "Authorization: Bearer replacemetoken"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "message": {
+    "message": "fetched",
+    "data": {
+      "results": [
+        {
+          "updated_at": "2020-06-04 11:38:18.013119Z",
+          "trace": true,
+          "presentation_request": {
+            "name": "Proof request",
+            "requested_predicates": {},
+            "non_revoked": {
+              "to": 1591270516,
+              "from": 0
+            },
+            "version": "1.0",
+            "requested_attributes": {
+              "additionalProp1": {
+                "non_revoked": {
+                  "to": 1591270516,
+                  "from": 0
+                },
+                "name": "name",
+                "restrictions": [
+                  {
+                    "schema_id": "Th7MpTaRZVRYnPiabds81Y:2:hsc:1.6",
+                    "cred_def_id": "Th7MpTaRZVRYnPiabds81Y:3:CL:16:hsc"
+                  }
+                ]
+              }
+            },
+            "nonce": "1234567890"
+          },
+          "created_at": "2020-06-04 11:38:18.013119Z",
+          "auto_present": false,
+          "state": "request_sent",
+          "connection_id": "bdac7762-0e2b-4b76-ac08-86445871055a",
+          "thread_id": "71144639-1151-488a-9646-9042b5ced1c3",
+          "presentation_exchange_id": "39d6e336-23dc-4721-8c84-3b91ff231525",
+          "role": "verifier",
+          "initiator": "self"
+        }
+      ]
+    },
+    "success": true
+  },
+  "duration": 0
+}
+```
+
+This endpoint retrieves a proof.
+
+This endpoint allows you to retrieve credentials and details of a proof request sent to your customer’s digital wallet. You can use this endpoint to see if a proof has been received and verified or access the credentials received.
+
+### HTTP Request
+
+`GET /present-proof/records/{pres_ex_id}`
+
+### Path Parameters
+
+| Parameter  | Description                       |
+| ---------- | --------------------------------- |
+| pres_ex_id | The proof presentation identifier |
+
+## Verify Proof
+
+```shell
+curl "http://example.com/present-proof/records/12345/verify-presentation"
+  -X POST
+  -H "Authorization: Bearer replacemetoken"
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "response": {
+    "message": "fetch",
+    "data": {
+      "updated_at": "2020-06-04 07:05:11Z",
+      "trace": true,
+      "presentation_request": {},
+      "created_at": "2020-06-04 07:05:11Z",
+      "auto_present": false,
+      "state": "verified",
+      "connection_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "thread_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "presentation": {},
+      "presentation_proposal_dict": {},
+      "presentation_exchange_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "role": "verifier",
+      "initiator": "self",
+      "verified": "true"
+    },
+    "success": true
+  },
+  "duration": 45
+}
+```
+
+This endpoint verifies a proof.
+
+This endpoint allows you to verify credentials received from your customer’s digital wallet in a proof request. The proof request will then be marked as verified for future reference. If there is an issue with the proof request, the response will contain "success": false to show that the proof is invalid.
+
+### HTTP Request
+
+`POST /present-proof/records/{pres_ex_id}/verify_presentation`
+
+### Path Parameters
+
+| Parameter  | Description                       |
+| ---------- | --------------------------------- |
+| pres_ex_id | The proof presentation identifier |

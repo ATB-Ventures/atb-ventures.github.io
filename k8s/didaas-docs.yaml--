@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: didaas-docs
+  labels:
+    run: didaas-docs
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: didaas-docs
+  template:
+    metadata:
+      labels:
+        app: didaas-docs
+    spec:
+      containers:
+        - image: gcr.io/leap-0123/didaas/didaas-docs:latest
+          imagePullPolicy: IfNotPresent
+          name: didaas-docs
+          ports:
+            - containerPort: 4567
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: didaas-docs
+  labels:
+    run: didaas-docs
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+    - port: 4567
+      protocol: TCP
+      targetPort: 4567
+      name: didaas-docs
+  selector:
+    app: didaas-docs

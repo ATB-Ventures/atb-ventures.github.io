@@ -1,0 +1,53 @@
+buildPack: docker
+pipelineConfig:
+  pipelines:
+    pullRequest:
+      build:
+        replace: true
+        steps:
+        - name: build-image
+          image: gcr.io/kaniko-project/executor:v0.23.0
+          command: /kaniko/executor
+          args:
+          - --cache=true
+          - --cache-dir=/workspace/cache
+          - --context=/workspace/source
+          - --dockerfile=/workspace/source/Dockerfile
+          - --destination=gcr.io/leap-0123/didaas/didaas-docs:${inputs.params.version}
+          - --destination=gcr.io/leap-0123/didaas/didaas-docs:staging
+          - --cache-repo=gcr.io/leap-0123/didaas/didaas-docs/cache
+          - --build-arg=TEST_VAR=123
+          dir: /workspace/source
+      promote:
+        replace: true
+    release:
+      build:
+        replace: true
+        steps:
+        - name: build-image
+          image: gcr.io/kaniko-project/executor:v0.23.0
+          command: /kaniko/executor
+          args:
+          - --cache=true
+          - --cache-dir=/workspace/cache
+          - --context=/workspace/source
+          - --dockerfile=/workspace/source/Dockerfile
+          - --destination=gcr.io/leap-0123/didaas/didaas-docs:${inputs.params.version}
+          - --destination=gcr.io/leap-0123/didaas/didaas-docs:production
+          - --cache-repo=gcr.io/leap-0123/didaas/didaas-docs/cache
+          - --build-arg=TEST_VAR=123
+          dir: /workspace/source
+      promote:
+        replace: true
+        steps:
+        - name: update-deployment
+          image: gcr.io/google.com/cloudsdktool/cloud-sdk:latest
+          command: kubectl
+          args:
+          - set
+          - image
+          - -n
+          - didaas-staging
+          - "deployment/didaas-docs"
+          - "didaas-docs=gcr.io/leap-0123/didaas/didaas-docs:${inputs.params.version}"
+
