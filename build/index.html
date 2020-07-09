@@ -1,0 +1,1163 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-08ef7cfb.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-fb9d56a3.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-13fadf4c.js"></script>
+
+      <script>
+        $(function() { 
+          oauthSetup({"client_id":"HEQwZVag65jM88vYLkbdRdshEk4DIscC","audience":"https://didaas.atb.com/","domain":"https://didaas.auth0.com/"});
+          });
+      </script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body onload="oauthCodeExchange()" class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-4814db0c.png" class="logo" alt="" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#authorize" class="toc-h2 toc-link" data-title="Authorize">Authorize</a>
+                  </li>
+                  <li>
+                    <a href="#token" class="toc-h2 toc-link" data-title="Token">Token</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#establish-connection" class="toc-h1 toc-link" data-title="Establish Connection">Establish Connection</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-invitation" class="toc-h2 toc-link" data-title="Create Invitation">Create Invitation</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#issue-credential" class="toc-h1 toc-link" data-title="Issue Credential">Issue Credential</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#create-schema" class="toc-h2 toc-link" data-title="Create Schema">Create Schema</a>
+                  </li>
+                  <li>
+                    <a href="#create-credential-definition" class="toc-h2 toc-link" data-title="Create Credential Definition">Create Credential Definition</a>
+                  </li>
+                  <li>
+                    <a href="#send-credential" class="toc-h2 toc-link" data-title="Send Credential">Send Credential</a>
+                  </li>
+                  <li>
+                    <a href="#body-parameters-3" class="toc-h2 toc-link" data-title="Body Parameters">Body Parameters</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#verify-credential" class="toc-h1 toc-link" data-title="Verify Credential">Verify Credential</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#send-proof-request" class="toc-h2 toc-link" data-title="Send Proof Request">Send Proof Request</a>
+                  </li>
+                  <li>
+                    <a href="#get-proof-records" class="toc-h2 toc-link" data-title="Get Proof Records">Get Proof Records</a>
+                  </li>
+                  <li>
+                    <a href="#verify-proof" class="toc-h2 toc-link" data-title="Verify Proof">Verify Proof</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to Copper, an open identity platform that enables you and your team to build trusted, seamless, and elegant experiences for your customers.</p>
+
+<p>These APIs provide methods to connect with digital wallets, create and issue credentials, and receive and verify information from users. This page describes these functions in detail and provides a method to retrieve authorization for making calls, receiving information and everything else you need to get started.</p>
+
+<p>Below is a user flow diagram of how each of these individual components work together:</p>
+
+<p><img src="images/flow_overview-137fd677.jpg" alt="" /></p>
+
+<p>Also, for your reference is breakdown of the roles:</p>
+
+<ul>
+<li><strong>Verifier Organization</strong>: Organization that consumes a credential the user already has for the purpose of either: (1) verifying that their credential meets the a set criteria (e.g. age must be greater than 18) or to (2) verify that they have a specified credential (e.g. must have full name credential issued by the Government of Alberta)</li>
+<li><strong>Issuer Organization</strong>: Organization that has the ability to issue credentials to the users based on a credential definition that their organization has created (e.g. ATB can issue a savings bank account credential based on the savings bank account credential definition they have created)</li>
+<li><strong>Wallet</strong>: The application that the user interacts with that allows them to connect with organizations, receive and store credentials from organizations, and send requested credentials to organizations for verification.</li>
+<li><strong>User</strong>: The owner and manager of their credentials. The user interacts with their wallet to keep track of their credentials and ensure that they have the most up to date copy of their credentials from organizations.</li>
+</ul>
+<h1 id='authentication'>Authentication</h1>
+<p>Copper uses OAuth2 Access Tokens to allow access to the API. You can register/login <a class="authorize-link" href="https://didaas.auth0.com/authorize?response_type=code&scope=openid%20profile%20email&client_id=HEQwZVag65jM88vYLkbdRdshEk4DIscC&state=2342423432&redirect_uri=http://localhost:4567&audience=https://didaas.atb.com/">here</a> to retrieve your access token.</p>
+
+<p>The authorization flow is automated, so it does not require you to call the below endpoints, but they have been provided for more detail.</p>
+<h2 id='authorize'>Authorize</h2>
+<blockquote>
+<p>Click the following link to sign up or log in from the browser: <a class="authorize-link" href="https://didaas.auth0.com/authorize?response_type=code&scope=openid%20profile%20email&client_id=HEQwZVag65jM88vYLkbdRdshEk4DIscC&state=2342423432&redirect_uri=http://localhost:4567&audience=https://didaas.atb.com/">Login/Signup</a></p>
+</blockquote>
+
+<p>This endpoint authenticates you with the platform to retrieve an access token. This flow needs to be executed in-browser.</p>
+<h3 id='link'>Link</h3>
+<p><a class="authorize-link" href="https://didaas.auth0.com/authorize?response_type=code&scope=openid%20profile%20email&client_id=HEQwZVag65jM88vYLkbdRdshEk4DIscC&state=2342423432&redirect_uri=http://localhost:4567&audience=https://didaas.atb.com/">Login/Signup</a></p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://didaas.auth0.com/authorize</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>response_type</td>
+<td>code</td>
+<td>Code response for authorization code exchange.</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>openid profile email</td>
+<td>Default scope for OIDC authorization.</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>HEQwZVag65jM88vYLkbdRdshEk4DIscC</td>
+<td>Client ID for IDaaS platform Auth0 application.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>2342423432</td>
+<td>State to pass for authorization code exchange, will be received back when redirected.</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>http://localhost:4567</td>
+<td>Redirect URI of slate docs to handle code for token exchange.</td>
+</tr>
+<tr>
+<td>audience</td>
+<td>https://didaas.atb.com/</td>
+<td>Audience of IDaaS platform Auth0 tenant.</td>
+</tr>
+</tbody></table>
+<h2 id='token'>Token</h2><h3 id='http-request-2'>HTTP Request</h3>
+<p><code>POST /oauth/token</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>grant_type</td>
+<td>authorization_code</td>
+<td>Authorization code grant type.</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td>HEQwZVag65jM88vYLkbdRdshEk4DIscC</td>
+<td>Client ID for IDaaS platform Auth0 application.</td>
+</tr>
+<tr>
+<td>redirect_uri</td>
+<td>http://localhost:4567</td>
+<td>Redirect URI of slate docs to handle code for token exchange.</td>
+</tr>
+<tr>
+<td>code</td>
+<td>sl6LIMC6dS85EriB</td>
+<td>Authorization code that is exchanged for token.</td>
+</tr>
+</tbody></table>
+
+<p>Copper expects the bearer JWT access_token to be included in all API requests to the server in a header that looks like the following:</p>
+
+<p><code>Authorization: Bearer replacemetoken</code></p>
+
+<aside class="notice">
+Login to generate the correct access token using the link above.
+</aside>
+<h1 id='establish-connection'>Establish Connection</h1>
+<p>This endpoint allows you to create a unique invitation that your user scans with their digital wallet in order to establish a secure connection with your organization. Once this connection is established you can issue credentials and send proof requests.</p>
+
+<p><img src="images/create_connection_flow-f78674c8.jpg" alt="" /></p>
+<h2 id='create-invitation'>Create Invitation</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/connections/create-invitation"</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer replacemetoken"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetched"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"connection_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bdac7762-0e2b-4b76-ac08-86445871055a"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"invitation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"16f53238-81ff-4d8a-950f-eb3ca0afa9ff"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"serviceEndpoint"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://192.168.43.60:7000"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"label"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shari"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"recipientKeys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"GscNoojbKptfZUCuhm4eotXyebG2bPFvLY8VxikoNroT"</span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"invitation_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://192.168.43.60:7000?c_i=eyJAdHlwZSI6ICJkaWQ6c292OkJ6Q2JzTlloTXJqSGlxWkRUVUFTSGc7c3BlYy9jb25uZWN0aW9ucy8xLjAvaW52aXRhdGlvbiIsICJAaWQiOiAiMTZmNTMyMzgtODFmZi00ZDhhLTk1MGYtZWIzY2EwYWZhOWZmIiwgInNlcnZpY2VFbmRwb2ludCI6ICJodHRwOi8vMTkyLjE2OC40My42MDo3MDAwIiwgImxhYmVsIjogInNoYXJpIiwgInJlY2lwaWVudEtleXMiOiBbIkdzY05vb2piS3B0ZlpVQ3VobTRlb3RYeWViRzJiUEZ2TFk4Vnhpa29Ocm9UIl19"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">366</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint creates a connection invitation.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>POST /connections/create-invitation</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>multi_use</td>
+<td>false</td>
+<td>If set to true, the invitation can be used multiple times</td>
+</tr>
+<tr>
+<td>public</td>
+<td>false</td>
+<td>If set to true, will create the invitation from the public DID.</td>
+</tr>
+<tr>
+<td>accept</td>
+<td>false</td>
+<td>If set to true, will auto-accept the invitation.</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>undefined</td>
+<td>An alias to use as an identifier for the connection</td>
+</tr>
+</tbody></table>
+<h1 id='issue-credential'>Issue Credential</h1>
+<p>These endpoints will walk you through how to create, define, and issue a credential to a particular user.</p>
+
+<p><img src="images/create_credential_flow-f1f40930.jpg" alt="" /></p>
+
+<p><img src="images/issue_credential_flow-11d4c3e1.jpg" alt="" /></p>
+<h2 id='create-schema'>Create Schema</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/schemas"</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer replacemetoken"</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "schema_version": "1.0",
+    "schema_name": "myfirstschema",
+    "attributes": [
+      "name",
+      "age"
+    ]
+  }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"schema created"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"schema_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myfirstschema"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"name"</span><span class="p">,</span><span class="w"> </span><span class="s2">"age"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"schema_ledger_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:2:myfristschema:1.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04T08:22:42.648Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createdBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">5337</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint allows you to create a schema. Schemas are essentially templates for the credential you would like to issue. Any new schema you create is published to the Sovrin Network and is able to be used or reused by other organizations as a base for their own credential definitions and proof requests.</p>
+
+<p>Learn More about <a href="https://sovrin.org/">Sovrin</a>.</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST /schemas</code></p>
+<h3 id='body-parameters'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>schema_version</td>
+<td>The version of the schema</td>
+</tr>
+<tr>
+<td>schema_name</td>
+<td>The name of the schema</td>
+</tr>
+<tr>
+<td>attributes</td>
+<td>The fields this schema contains</td>
+</tr>
+</tbody></table>
+<h2 id='create-credential-definition'>Create Credential Definition</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/credential-definitions"</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer replacemetoken"</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "schema_id": "Th7MpTaRZVRYnPiabds81Y:2:myfristschema:1.0",
+    "tag": "default",
+    "support_revocation": true
+    }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credential definition created"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"tag"</span><span class="p">:</span><span class="w"> </span><span class="s2">"default"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:2:myfristschema:1.0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"credential_definition_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:3:CL:16:default"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createDateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04T09:22:03.377Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"createdBy"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">14882</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint allows you to create a credential definition. A credential definition is a way to define criteria for the schema you wish to issue, meaning a credential definition cannot be created without a schema. You are able to decide whether or not it can be revoked as well as assign any particular “tags” to name the definition in order for the user.</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>POST /credential-definitions</code></p>
+<h3 id='body-parameters-2'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>schema_id</td>
+<td>The schema that this credential definition will use</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>The name given to this credential definition</td>
+</tr>
+<tr>
+<td>support_revocation</td>
+<td>If set to true, the credentials can be revoked</td>
+</tr>
+</tbody></table>
+<h2 id='send-credential'>Send Credential</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/issue-credential/send"</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer replacemetoken"</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+  <span class="nt">-d</span> <span class="s1">'{
+      "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+      "schema_name": "preferences",
+      "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+      "comment": "string",
+      "auto_remove": true,
+      "credential_proposal": {
+        "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+        "attributes": [
+          {
+            "name": "favourite_drink",
+            "mime-type": "image/jpeg",
+            "value": "martini"
+          }
+        ]
+      },
+      "schema_version": "1.0",
+      "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+      "connection_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0"
+    }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetched"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"thread_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2848733d-1996-401d-87d5-f3d6b15882b7"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"auto_remove"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04 10:24:16.298609Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"connection_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bdac7762-0e2b-4b76-ac08-86445871055a"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"credential_definition_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:3:CL:16:hsc"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"issuer"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04 10:24:16.298609Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"offer_sent"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"initiator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"self"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"credential_offer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:2:hsc:1.6"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cred_def_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:3:CL:16:hsc"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"key_correctness_proof"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"c"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78936690231364280453412325751756425237137357945967202595073872890677536567049"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"xz_cap"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1064109358124352103954475701106545985220011463370530551830518156569951364440454339083344462006285467579170104584135178105654293018632549627139490378979003842035569123423638840754088343554296509258906894662514013267701509731289431030861407164725547221354972733252011825376187065315915903871332537433652259436104010151206775275618530051658046479280695404122732258942300147774388743396351240826112053175830209031045412506271034985345397223458533100347069717826326269639671023809194748481037337844024920936319097034888020700761082658404331263722367660776909793548073865144342632599096102288782167246192202841858857511930144901939341162620199295438245425954066715368082843976923851656640745920924476"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"xr_cap"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"master_secret"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"929754055935645339367658795602121756038281587937920701228979877965684805436776904817392850210481914884310849404860565377523986875577010232513290183831303717487178853980215172833207086254166063703315792347451777472166806383139070898594689395670400744491764947593910760373434142504123718801821027146916119821744332651312593228548519278041571906861061992741014902277979189104381554188736923206008579922660269757820507821137713212268899410186807044554011805002512448047405820484255712397593673520395814506118310506612196564517220987714387011323073710258318130558305123400633228649826669252734806789364387034243285249745938623117067715982293892369612478495305433747116889594036468158863432284739937"</span><span class="w">
+            </span><span class="p">],</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"1646559889192918408550316109951814272612709933149434352192671820428215288907620204227156568761421193028134631792095138255053898532176323411811849362472088201227230910608507464741893032614291534958719280112728528176906735882102252456978155008006818047045332682579525623207794185183455912248887996282428692718778171087295311246175014468639370584227824281528596849480214180466132360666725967439558677861973510236896131829200205321352628707616775640841689994192582408896238816724517398655585611145868923795405065221160189674848001406858293635114882014621494330735385488133324348695813994036955443748927609409671745922354923855921422089851307577769810676708121471531892608581382970155294048795236037"</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1203694884322993220187109"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nl">"auto_issue"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trace"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"auto_offer"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"credential_exchange_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"947a8900-4d21-4b04-a09b-f2bc8f27e892"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:2:hsc:1.6"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"credential_proposal_dict"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/propose-credential"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2053f913-0cf2-45f4-b6bf-673c5181927c"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.6"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"schema_issuer_did"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"schema_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hsc"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"credential_proposal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jon"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"send issue"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:2:hsc:1.6"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"issuer_did"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"cred_def_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:3:CL:16:hsc"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">156</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint allows you to issue a credential to your customer’s digital wallet. Once you have chosen a schema and defined any necessary criteria you are able to populate a user&#39;s information and issue via a secure connection. They will then be given the opportunity to review and add to their digital wallet.</p>
+<h3 id='http-request-6'>HTTP Request</h3>
+<p><code>POST /issue-credential/send</code></p>
+<h2 id='body-parameters-3'>Body Parameters</h2>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cred_def_id</td>
+<td>The credential definition id</td>
+</tr>
+<tr>
+<td>schema_name</td>
+<td>The credential schema name</td>
+</tr>
+<tr>
+<td>issuer_did</td>
+<td>The did for the credential issuer</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>A comment to attach to the issue credential request</td>
+</tr>
+<tr>
+<td>auto_remove</td>
+<td>true if the credential should be automatically removed when put on the revocation list</td>
+</tr>
+<tr>
+<td>schema_version</td>
+<td>The version of the schema being used</td>
+</tr>
+<tr>
+<td>schema_issuer_id</td>
+<td>The id of the schema issuer</td>
+</tr>
+<tr>
+<td>connection_id</td>
+<td>The connection id to send the credential to</td>
+</tr>
+<tr>
+<td>schema_id</td>
+<td>The id of the schema being used</td>
+</tr>
+<tr>
+<td>credential_proposal</td>
+<td>An object containing the credential attributes</td>
+</tr>
+</tbody></table>
+
+<p>The credential_proposal object contains the following parameters</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>@type</td>
+<td>The id of the credential to issue</td>
+</tr>
+<tr>
+<td>attributes</td>
+<td>An array of attribute objects</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The name of the credential attribute</td>
+</tr>
+<tr>
+<td>mime_type</td>
+<td>The type of data the attribute contains</td>
+</tr>
+<tr>
+<td>value</td>
+<td>The value of the attribute</td>
+</tr>
+</tbody></table>
+<h1 id='verify-credential'>Verify Credential</h1><h2 id='send-proof-request'>Send Proof Request</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/present-proof/send-request"</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer replacemetoken"</span>
+  <span class="nt">-H</span> <span class="s1">'Content-Type: application/json'</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "connection_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "proof_request": {
+      "version": "1.0",
+      "nonce": "1234567890",
+      "name": "Proof request",
+      "requested_predicates": {
+        "additionalProp1": {
+          "p_value": 0,
+          "p_type": "&gt;=",
+          "name": "index",
+          "restrictions": [
+            {
+              "credential_definition_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+              "schema_name": "transcript",
+              "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+              "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0",
+              "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+              "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+              "schema_version": "1.0"
+            }
+          ],
+          "non_revoked": {
+            "from_epoch": 1584961661,
+            "to_epoch": 1584961661
+          }
+        }
+      },
+      "requested_attributes": {
+        "additionalProp1": {
+          "name": "favouriteDrink",
+          "restrictions": [
+            {
+              "credential_definition_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+              "schema_name": "transcript",
+              "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+              "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0",
+              "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+              "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+              "schema_version": "1.0"
+            }
+          ],
+          "non_revoked": {
+            "from_epoch": 1584961661,
+            "to_epoch": 1584961661
+          }
+        }
+      }
+    },
+    "comment": "string"
+  }'</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"connection_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3fa85f64-5717-4562-b3fc-2c963f66afa6"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"proof_request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Proof request"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"requested_predicates"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"additionalProp1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"p_value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"p_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&gt;="</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"index"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"restrictions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"schema_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transcript"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"cred_def_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WgWxqztrNooG92RXvxSTWv:3:CL:20:tag"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"schema_issuer_did"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WgWxqztrNooG92RXvxSTWv"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"issuer_did"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WgWxqztrNooG92RXvxSTWv"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"non_revoked"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"from_epoch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1584961661</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"to_epoch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1584961661</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"requested_attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"additionalProp1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"favouriteDrink"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"restrictions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"schema_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transcript"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"cred_def_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WgWxqztrNooG92RXvxSTWv:3:CL:20:tag"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"schema_issuer_did"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WgWxqztrNooG92RXvxSTWv"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"issuer_did"</span><span class="p">:</span><span class="w"> </span><span class="s2">"WgWxqztrNooG92RXvxSTWv"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"schema_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nl">"non_revoked"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"from_epoch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1584961661</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"to_epoch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1584961661</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"comment"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint allows you to create a proof request that allows you to receive and verify information from your customer.</p>
+<h3 id='http-request-7'>HTTP Request</h3>
+<p><code>POST /present-proof/send-request</code></p>
+<h3 id='body-parameters-4'>Body Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>connection_id</td>
+<td>The connection identifier to send the proof request to</td>
+</tr>
+<tr>
+<td>comment</td>
+<td>A comment to attach to the proof request</td>
+</tr>
+<tr>
+<td>proof_request</td>
+<td>An object containing proof request parameters</td>
+</tr>
+<tr>
+<td>version</td>
+<td>The proof request version</td>
+</tr>
+<tr>
+<td>nonce</td>
+<td>The proof request identifier</td>
+</tr>
+<tr>
+<td>name</td>
+<td>The proof request name</td>
+</tr>
+<tr>
+<td>requested_predicates</td>
+<td>An object containing predicates to request</td>
+</tr>
+<tr>
+<td>requested_attributes</td>
+<td>An object containing attributes to request</td>
+</tr>
+</tbody></table>
+
+<p>Attributes and predicates have the following parameters:</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The connection identifier to send the proof request to</td>
+</tr>
+<tr>
+<td>restrictions</td>
+<td>A comment to attach to the proof request</td>
+</tr>
+<tr>
+<td>cred_def_id</td>
+<td>The id of the credential definition to restrict the field to</td>
+</tr>
+<tr>
+<td>schema_name</td>
+<td>The credential schema to restrict the field to</td>
+</tr>
+<tr>
+<td>schema_id</td>
+<td>The id of the schema to restrict the field to</td>
+</tr>
+<tr>
+<td>schema_issuer_did</td>
+<td>The schema issuer did to restrict the field to</td>
+</tr>
+<tr>
+<td>issuer_did</td>
+<td>The issuer did to restrict the field to</td>
+</tr>
+<tr>
+<td>schema_version</td>
+<td>The schema version to restrict the field to</td>
+</tr>
+<tr>
+<td>non_revoked</td>
+<td>An object containing proof request parameters</td>
+</tr>
+<tr>
+<td>from_epoch</td>
+<td>beginning of revocation period</td>
+</tr>
+<tr>
+<td>to_epoch</td>
+<td>end of revocation period</td>
+</tr>
+</tbody></table>
+<h2 id='get-proof-records'>Get Proof Records</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/present-proof/records/1234"</span>
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer replacemetoken"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetched"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04 11:38:18.013119Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"trace"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"presentation_request"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Proof request"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"requested_predicates"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+            </span><span class="nl">"non_revoked"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="mi">1591270516</span><span class="p">,</span><span class="w">
+              </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"requested_attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nl">"additionalProp1"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"non_revoked"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                  </span><span class="nl">"to"</span><span class="p">:</span><span class="w"> </span><span class="mi">1591270516</span><span class="p">,</span><span class="w">
+                  </span><span class="nl">"from"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"restrictions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                  </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"schema_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:2:hsc:1.6"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"cred_def_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Th7MpTaRZVRYnPiabds81Y:3:CL:16:hsc"</span><span class="w">
+                  </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"nonce"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04 11:38:18.013119Z"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"auto_present"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"request_sent"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"connection_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bdac7762-0e2b-4b76-ac08-86445871055a"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"thread_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"71144639-1151-488a-9646-9042b5ced1c3"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"presentation_exchange_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"39d6e336-23dc-4721-8c84-3b91ff231525"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verifier"</span><span class="p">,</span><span class="w">
+          </span><span class="nl">"initiator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"self"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint retrieves a proof.</p>
+<h3 id='http-request-8'>HTTP Request</h3>
+<p><code>GET /present-proof/records/{pres_ex_id}</code></p>
+<h3 id='path-parameters'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pres_ex_id</td>
+<td>The proof presentation identifier</td>
+</tr>
+</tbody></table>
+<h2 id='verify-proof'>Verify Proof</h2><div class="highlight"><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/present-proof/records/12345/verify-presentation"</span>
+  <span class="nt">-X</span> POST
+  <span class="nt">-H</span> <span class="s2">"Authorization: Bearer replacemetoken"</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fetch"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04 07:05:11Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"trace"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"presentation_request"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-06-04 07:05:11Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"auto_present"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verified"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"connection_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3fa85f64-5717-4562-b3fc-2c963f66afa6"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"thread_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3fa85f64-5717-4562-b3fc-2c963f66afa6"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"presentation"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nl">"presentation_proposal_dict"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+      </span><span class="nl">"presentation_exchange_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3fa85f64-5717-4562-b3fc-2c963f66afa6"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"verifier"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"initiator"</span><span class="p">:</span><span class="w"> </span><span class="s2">"self"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"verified"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"duration"</span><span class="p">:</span><span class="w"> </span><span class="mi">45</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>This endpoint verifies a proof.</p>
+<h3 id='http-request-9'>HTTP Request</h3>
+<p><code>POST /present-proof/records/{pres_ex_id}/verify_presentation</code></p>
+<h3 id='path-parameters-2'>Path Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pres_ex_id</td>
+<td>The proof presentation identifier</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
